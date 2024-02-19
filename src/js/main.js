@@ -15,7 +15,7 @@ navigation.forEach((anchor, index1) => {
     })
 })
 
-home.addEventListener("mousemove", (event) => {
+document.addEventListener("mousemove", (event) => {
     let width = window.innerWidth;
     let height = window.innerHeight;
 
