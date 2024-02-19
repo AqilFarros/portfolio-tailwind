@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="output.css">
+    <title>Portfolio</title>
+    <style>
+        .button button:hover {
+            box-shadow: 0 0 35px;
+        }
+
+        .button button:hover i::before {
+            box-shadow: 33px 32px;
+        }
+
+        .button button:hover i::after {
+            box-shadow: 32px -33px;
+        }
+
+        #codeIcon {
+            perspective: 1000px;
+        }
+
+        #namePortfolio {
+            color: #172554;
+        }
+    </style>
+    <script src="js/gsap.min.js"></script>
+    <script src="js/TextPlugin.min.js"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="absolute w-full top-11 z-10">
+        <div class="container mx-auto flex justify-between">
+            <div class="flex items-center">
+                <a href="#" class="sm:text-3xl text-xl font-bold ml-3">AQIL FARROS.</a>
+                <div class="sm:ml-5 ml-2 sm:text-2xl text-xl">
+                    ☀️
+                </div>
+            </div>
+
+            <div class="flex items-center mr-2">
+                <button class="mr-2 text-white bg-blue-600 px-2 py-1 sm:text-sm text-xs tracking-[0.2rem] duration-500"
+                    id="menuButton" onclick="toggleButton()">MENU</button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-8 h-8 stroke-blue-600 duration-500 cursor-pointer" id="bars"
+                    onclick="toggleButton()">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <div
+            class="fixed sm:w-[40%] backdrop-blur-md w-[100%] h-screen flex justify-center items-center flex-col -translate-x-[100%] duration-500 ease-out overflow-hidden navigation z-10">
+            <a href="#" class="mx-4 py-4 text-blue-600 font-medium duration-500 ease-out"
+                onclick="toggleButton()">Home</a>
+            <a href="#" class="mx-4 py-4 text-blue-600 font-medium duration-500 ease-out"
+                onclick="toggleButton()">About</a>
+            <a href="#" class="mx-4 py-4 text-blue-600 font-medium duration-500 ease-out"
+                onclick="toggleButton()">Portfolio</a>
+            <a href="#" class="mx-4 py-4 text-blue-600 font-medium duration-500 ease-out"
+                onclick="toggleButton()">Contact</a>
+        </div>
+    </div>
+    <!-- END NAVBAR -->
+
+    <!-- PANEL TRANSITION -->
+    <div class="flex min-w-full min-h-screen fixed top-0 left-0 -z-10" id="transitionPanel">
+        <div class="w-full z-[50]" id="panelTr1"></div>
+        <div class="w-full z-[40]" id="panelTr2"></div>
+        <div class="w-full z-[30]" id="panelTr3"></div>
+        <div class="w-full z-[20]" id="panelTr4"></div>
+        <div class="w-full z-[10]" id="panelTr5"></div>
+    </div>
+    <!-- END PANEL TRANSITION -->
+
+
+
+
+
+
+    <div class="section py-20 flex items-center min-h-screen bg-blue-200" id="home">
+        <div class="container flex justify-center flex-col mx-auto px-6">
+
+            <img src="asset/code-icon.png" alt=""
+                class="w-1/3 absolute lg:top-[2%] top-[10%] right-[10%] animate-[codeAnimation_4s_infiite_linear]"
+                id="codeIcon">
+
+            <div class="mb-4">
+                <h1 class="font-name xl:text-8xl lg:text-7xl sm:text-5xl text-3xl md:text-start text-center"
+                    id="namePortfolio">
+                    <p class="inline-block"><span id="wordName" class="inline-block">A</span><span id="wordName"
+                            class="inline-block">q</span><span id="wordName" class="inline-block">i</span><span
+                            id="wordName" class="inline-block">l</span></p>
+                    <p class="inline-block"><span id="wordName" class="inline-block">F</span><span id="wordName"
+                            class="inline-block">a</span><span id="wordName" class="inline-block">r</span><span
+                            id="wordName" class="inline-block">r</span><span id="wordName"
+                            class="inline-block">o</span><span id="wordName" class="inline-block">s</span></p>
+                    <p class="inline-block"><span id="wordName" class="inline-block">A</span><span id="wordName"
+                            class="inline-block">l</span></p>
+                    <p class="inline-block"><span id="wordName" class="inline-block">G</span><span id="wordName"
+                            class="inline-block">h</span><span id="wordName" class="inline-block">o</span><span
+                            id="wordName" class="inline-block">n</span><span id="wordName"
+                            class="inline-block">i</span><span id="wordName" class="inline-block">m</span></p>
+                </h1>
+                <h3 id="jobHome"
+                    class="xl:text-7xl lg:text-6xl sm:text-4xl text-2xl md:text-start text-center tracking-wide">I'm A
+                    <span id="jobDisplay"></span><span id="cursorType">_</span></h3>
+            </div>
+            <div class="relative w-full h-1 my-4 bg-blue-600
+            before:absolute before:w-1/6 before:h-2 before:bg-blue-600 before:top-2/4 before:left-[0%] before:-translate-y-1/2 before:animate-[lineHome_1.5s_linear_infinite] sm:before:animate-[lineHome_2s_linear_infinite] md:before:animate-[lineHome_4s_linear_infinite]
+            " id="lineHome"></div>
+            <div class="button grid grid-cols-1 sm:grid-cols-2 md:flex flex-wrap gap-6 md:ml-6 mt-2">
+                <button id="buttonHome" class="relative opacity-0 translate-y-[50px] mx-auto md:mx-0 bg-blue-600 text-white px-[30px] py-[10px] text-[1em] font-normal tracking-widest duration-500
+                group/button hover:tracking-[0.25em] hover:bg-blue-600 hover:text-blue-600 hover:shadow-blue-600
+                before:absolute before:inset-[2px] before:bg-blue-300">
+                    <span class="relative">HOME</span>
+                    <i
+                        class="absolute inset-0 block
+                    before:absolute before:top-[-6px] before:left-[100%] before:-translate-x-2/4 before:w-[10px] before:h-[10px] before:bg-blue-300 before:border-[2px] before:border-blue-600 before:duration-500
+                    group-hover/button:before:left-0 group-hover/button:before:rotate-45 group-hover/button:before:shadow-blue-600
+                    after:absolute after:bottom-[-6px] after:left-[0%] after:-translate-x-2/4 after:w-[10px] after:h-[10px] after:bg-blue-300 after:border-[2px] after:border-blue-600 after:duration-500
+                    group-hover/button:after:left-[100%] group-hover/button:after:-rotate-45 group-hover/button:after:shadow-blue-600"></i>
+                </button>
+                <button id="buttonHome" class="relative opacity-0 translate-y-[50px] mx-auto md:mx-0 bg-yellow-500 text-white px-[30px] py-[10px] text-[1em] font-normal tracking-widest duration-500
+                group/button hover:tracking-[0.25em] hover:bg-yellow-500 hover:text-yellow-500 hover:shadow-yellow-500
+                before:absolute before:inset-[2px] before:bg-yellow-300">
+                    <span class="relative">ABOUT</span>
+                    <i
+                        class="absolute inset-0 block
+                    before:absolute before:top-[-6px] before:left-[100%] before:-translate-x-2/4 before:w-[10px] before:h-[10px] before:bg-yellow-300 before:border-[2px] before:border-yellow-500 before:duration-500
+                    group-hover/button:before:left-0 group-hover/button:before:rotate-45 group-hover/button:before:shadow-yellow-500
+                    after:absolute after:bottom-[-6px] after:left-[0%] after:-translate-x-2/4 after:w-[10px] after:h-[10px] after:bg-yellow-300 after:border-[2px] after:border-yellow-500 after:duration-500
+                    group-hover/button:after:left-[100%] group-hover/button:after:-rotate-45 group-hover/button:after:shadow-yellow-500"></i>
+                </button>
+                <button id="buttonHome" class="relative opacity-0 translate-y-[50px] mx-auto md:mx-0 bg-lime-500 text-white px-[30px] py-[10px] text-[1em] font-normal tracking-widest duration-500
+                group/button hover:tracking-[0.25em] hover:bg-lime-500 hover:text-lime-500 hover:shadow-lime-500
+                before:absolute before:inset-[2px] before:bg-lime-300">
+                    <span class="relative">PORTFOLIO</span>
+                    <i
+                        class="absolute inset-0 block
+                    before:absolute before:top-[-6px] before:left-[100%] before:-translate-x-2/4 before:w-[10px] before:h-[10px] before:bg-lime-300 before:border-[2px] before:border-lime-500 before:duration-500
+                    group-hover/button:before:left-0 group-hover/button:before:rotate-45 group-hover/button:before:shadow-lime-500
+                    after:absolute after:bottom-[-6px] after:left-[0%] after:-translate-x-2/4 after:w-[10px] after:h-[10px] after:bg-lime-300 after:border-[2px] after:border-lime-500 after:duration-500
+                    group-hover/button:after:left-[100%] group-hover/button:after:-rotate-45 group-hover/button:after:shadow-lime-500"></i>
+                </button>
+                <button id="buttonHome" class="relative opacity-0 translate-y-[50px] mx-auto md:mx-0 bg-red-500 text-white px-[30px] py-[10px] text-[1em] font-normal tracking-widest duration-500
+                group/button hover:tracking-[0.25em] hover:bg-red-500 hover:text-red-500 hover:shadow-red-500
+                before:absolute before:inset-[2px] before:bg-red-300">
+                    <span class="relative">CONTACT</span>
+                    <i
+                        class="absolute inset-0 block
+                    before:absolute before:top-[-6px] before:left-[100%] before:-translate-x-2/4 before:w-[10px] before:h-[10px] before:bg-red-300 before:border-[2px] before:border-red-500 before:duration-500
+                    group-hover/button:before:left-0 group-hover/button:before:rotate-45 group-hover/button:before:shadow-red-500
+                    after:absolute after:bottom-[-6px] after:left-[0%] after:-translate-x-2/4 after:w-[10px] after:h-[10px] after:bg-red-300 after:border-[2px] after:border-red-500 after:duration-500
+                    group-hover/button:after:left-[100%] group-hover/button:after:-rotate-45 group-hover/button:after:shadow-red-500"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section py-20 min-h-screen bg-yellow-50 hidden" id="about">
+        <div class="container mx-auto">
+            <h1 class="relative mx-auto w-fit text-yellow-500 mt-10 xl:text-7xl lg:text-6xl sm:text-4xl text-2xl
+            before:absolute before:w-[200%] before:h-1 before:bg-yellow-500 before:bottom-[-10px] before:left-1/2 before:-translate-x-1/2
+            after:absolute after:w-[70%] after:h-2 after:bg-yellow-500 after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2
+            ">ABOUT.</h1>
+        </div>
+    </div>
+
+    <div class="section py-20 min-h-screen bg-lime-100 hidden" id="portfolio">
+        <div class="container mx-auto">
+            <h1 class="relative mx-auto w-fit text-lime-600 mt-10 xl:text-7xl lg:text-6xl sm:text-4xl text-2xl
+            before:absolute before:w-[200%] before:h-1 before:bg-lime-600 before:bottom-[-10px] before:left-1/2 before:-translate-x-1/2
+            after:absolute after:w-[70%] after:h-2 after:bg-lime-600 after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2
+            ">PORTFOLIO.</h1>
+        </div>
+    </div>
+
+    <div class="section py-20 min-h-screen bg-red-200 hidden" id="contact">
+        <div class="container mx-auto">
+            <h1 class="relative mx-auto w-fit text-red-600 mt-10 xl:text-7xl lg:text-6xl sm:text-4xl text-2xl
+            before:absolute before:w-[200%] before:h-1 before:bg-red-600 before:bottom-[-10px] before:left-1/2 before:-translate-x-1/2
+            after:absolute after:w-[70%] after:h-2 after:bg-red-600 after:bottom-[-12px] after:left-1/2 after:-translate-x-1/2
+            ">CONTACT.</h1>
+        </div>
+    </div>
+
+
+    <script src="js/initialization.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
