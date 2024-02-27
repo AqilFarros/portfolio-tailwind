@@ -1,3 +1,42 @@
+document.addEventListener('DOMContentLoaded', function () {
+    aboutTextScroll.forEach((char) => {
+        const text = new SplitType(char, { types: 'words' })
+
+        gsap.from(text.words, {
+            scrollTrigger: {
+                trigger: char,
+                start: 'top 80%',
+                end: 'top 60%',
+                scrub: true,
+                markers: false
+            },
+            color: "rgba(255, 255, 255, 0.1)",
+            // scaleY: 0,
+            // y: -20,
+            // transformOrigin: "top",
+            stagger: 0.1
+        });
+    });
+});
+
+let tlLoad = gsap.timeline()
+
+tlLoad.to('#about', {
+    display: 'none',
+    duration: 2,
+    onComplete: homeAnimation
+})
+    .to('#loading', {
+        opacity: 0,
+        duration: 1,
+
+    })
+    .to('#loading', {
+        zIndex: -1,
+        duration: 0
+    })
+
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
 navigation.forEach((anchor, index1) => {
@@ -29,9 +68,8 @@ document.addEventListener("mousemove", (event) => {
     })
 })
 
-homeAnimation()
-
-
+// homeAnimation()
+preapareAnimation()
 
 
 const toggleButton = () => {
@@ -61,11 +99,17 @@ function eventPanel(index1, panel, index2, theme, index3) {
         navigation.forEach((anchor2) => {
             anchor2.classList.remove(colorTheme[index3].color)
             theme.section.classList.add("hidden")
+            theme.section.style.display = 'none'
             if (index1 === index3) {
                 menuButton.classList.add(theme.bgColor)
                 bar.classList.add(theme.stroke)
                 anchor2.classList.add(theme.color)
                 theme.section.classList.remove("hidden")
+                if (theme.section == home) {
+                    theme.section.style.display = 'flex'
+                } else {
+                    theme.section.style.display = 'block'
+                }
             }
         })
     }
@@ -153,7 +197,10 @@ function eventPanel(index1, panel, index2, theme, index3) {
             x: "0%",
             duration: 0.2,
             ease: "sine.out",
-            onComplete: changePanel
+            onComplete: () => {
+                changePanel()
+
+            }
         })
 
         .to("#panelTr1", {
@@ -228,7 +275,8 @@ function eventPanel(index1, panel, index2, theme, index3) {
         .to("#panelTr5", {
             x: "100%",
             duration: 0.2,
-            ease: "sine.in"
+            ease: "sine.in",
+            onComplete: displayAnimation
         })
 
         .to("#panelTr1", {
@@ -265,15 +313,21 @@ function eventPanel(index1, panel, index2, theme, index3) {
 function homeAnimation() {
     let animation = gsap.timeline()
 
-    animation.from("#wordName", {
-        duration: 0.3,
-        color: "red",
-        opacity: 0,
-        y: 50,
-        ease: "bounce.out",
-        delay: 0.05,
-        stagger: 0.05
+    animation.from("#lineHome", {
+        width: "0%",
+        duration: 1
     })
+        .from("#wordName", {
+            duration: 0.3,
+            color: "red",
+            opacity: 0,
+            y: 50,
+            scaleY: 0,
+            transformOrigin: "top",
+            ease: "sine.out",
+            delay: 0.05,
+            stagger: 0.05
+        })
         .to("#namePortfolio", {
             webkitTextStroke: "#93c5fd 2px",
             skewX: -10,
@@ -289,10 +343,6 @@ function homeAnimation() {
                 cursorType()
                 masterJobTl.play()
             }
-        })
-        .from("#lineHome", {
-            width: "0%",
-            duration: 1
         })
         .to("#buttonHome", {
             duration: 0.4,
@@ -317,9 +367,78 @@ function homeAnimation() {
 
     let masterJobTl = gsap.timeline({ repeat: -1 }).pause()
 
-        jobWord.forEach((word) => {
-            let jobTl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-            jobTl.to("#jobDisplay", { duration: 1, text: word })
-            masterJobTl.add(jobTl)
-        })
+    jobWord.forEach((word) => {
+        let jobTl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+        jobTl.to("#jobDisplay", { duration: 1, text: word })
+        masterJobTl.add(jobTl)
+    })
 }
+
+function preapareAnimation() {
+    if (!preapareFlag) {
+        let tlPrepare = gsap.timeline()
+
+        tlPrepare.to("#splitAboutData .char", {
+            y: 10,
+            opacity: 0,
+            duration: 0
+        })
+            .to("#pictureAbout", {
+                y: 50,
+                opacity: 0,
+                duration: 0
+            })
+            .to("#aboutTextScroll", {
+                opacity: 0,
+                duration: 0
+            })
+
+        preapareFlag = true
+    }
+}
+
+function displayAnimation() {
+    if (!about.classList.contains("hidden")) {
+        aboutAnimation()
+    }
+}
+
+function aboutAnimation() {
+    if (!aboutFlag) {
+        let tlAbout = gsap.timeline()
+
+        tlAbout.to("#splitAboutData .char", {
+            y: 0,
+            opacity: 1,
+            stagger: 0.01,
+            duration: 0.2
+        })
+            .to("#pictureAbout", {
+                y: 0,
+                opacity: 1,
+                duration: 0.5
+            })
+            .to("#aboutTextScroll", {
+                opacity: 1,
+                duration: 0.3
+            })
+
+        aboutFlag = true
+    }
+}
+
+
+
+
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+    console.log(e)
+})
+
+function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)  

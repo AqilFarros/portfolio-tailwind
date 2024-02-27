@@ -14,6 +14,13 @@ let contact = document.getElementById("contact");
 
 let buttonsHome = document.querySelectorAll(".button button")
 
+let preapareFlag = false
+
+let aboutFlag = false
+const splitAboutData = new SplitType('#splitAboutData')
+const aboutTextScroll = document.querySelectorAll("#aboutTextScroll")
+console.log(aboutTextScroll);
+
 const colorTheme = [
     {
         section: home,
@@ -88,3 +95,4 @@ gsap.to("#panelTr5", {
     duration: 0
 })
 
+gsap.registerPlugin(ScrollTrigger)
