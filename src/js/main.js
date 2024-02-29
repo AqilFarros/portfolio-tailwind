@@ -33,7 +33,10 @@ tlLoad.to('#about', {
     })
     .to('#loading', {
         zIndex: -1,
-        duration: 0
+        duration: 0,
+        onComplete: () => {
+            document.body.classList.remove('overflow-hidden')
+        }
     })
 
 
