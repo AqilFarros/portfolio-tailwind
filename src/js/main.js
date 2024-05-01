@@ -1,14 +1,14 @@
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', function (event) {
+
     aboutTextScroll.forEach((char) => {
         const text = new SplitType(char, { types: 'words' })
     
         gsap.from(text.words, {
             scrollTrigger: {
                 trigger: char,
-                start: 'center 80%',
+                start: '20% 80%',
                 end: 'top 60%',
                 scrub: true,
-                markers: false
             },
             color: "rgba(255, 255, 255, 0.1)",
             // scaleY: 0,
@@ -51,18 +51,6 @@ window.addEventListener('DOMContentLoaded', function () {
     loadingScreen()
 });
 
-
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-
-
-
-
-
-// homeAnimation()
-
-
-
 const toggleButton = () => {
     let dBarPath = barPath.getAttribute("d")
 
@@ -87,7 +75,7 @@ function loadingScreen() {
 
     tlLoad.to('#about', {
         display: 'none',
-        duration: 0.1,
+        duration: 0.4,
     })
         .to('#first', {
             display: 'block',
