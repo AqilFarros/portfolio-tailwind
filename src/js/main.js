@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', function () {
     aboutTextScroll.forEach((char) => {
         const text = new SplitType(char, { types: 'words' })
-
+    
         gsap.from(text.words, {
             scrollTrigger: {
                 trigger: char,
-                start: 'top 80%',
+                start: 'center 80%',
                 end: 'top 60%',
                 scrub: true,
                 markers: false
@@ -17,62 +17,50 @@ document.addEventListener('DOMContentLoaded', function () {
             stagger: 0.1
         });
     });
-});
 
-let tlLoad = gsap.timeline()
-
-tlLoad.to('#about', {
-    display: 'none',
-    duration: 2,
-    onComplete: homeAnimation
-})
-    .to('#loading', {
-        opacity: 0,
-        duration: 1,
-
-    })
-    .to('#loading', {
-        zIndex: -1,
-        duration: 0,
-        onComplete: () => {
-            document.body.classList.remove('overflow-hidden')
-        }
-    })
-
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-
-navigation.forEach((anchor, index1) => {
-    transitionPanel.forEach((panel, index2) => {
-        colorTheme.forEach((theme, index3) => {
-            buttonsHome.forEach((button, btnIndex) => {
-                anchor.addEventListener("click", () => {
-                    eventPanel(index1, panel, index2, theme, index3);
-                })
-                button.addEventListener("click", () => {
-                    eventPanel(btnIndex, panel, index2, theme, index3);
+    navigation.forEach((anchor, index1) => {
+        transitionPanel.forEach((panel, index2) => {
+            colorTheme.forEach((theme, index3) => {
+                buttonsHome.forEach((button, btnIndex) => {
+                    anchor.addEventListener("click", () => {
+                        eventPanel(index1, panel, index2, theme, index3);
+                    })
+                    button.addEventListener("click", () => {
+                        eventPanel(btnIndex, panel, index2, theme, index3);
+                    })
                 })
             })
         })
     })
-})
 
-document.addEventListener("mousemove", (event) => {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    let positionX = (event.clientX / width) - 0.55;
-    let positionY = (event.clientY / height) - 0.55;
-
-    gsap.to("#codeIcon", {
-        rotationY: positionX * 150,
-        rotationX: positionY * 150,
-        ease: "none"
+    document.addEventListener("mousemove", (event) => {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+    
+        let positionX = (event.clientX / width) - 0.55;
+        let positionY = (event.clientY / height) - 0.55;
+    
+        gsap.to("#codeIcon", {
+            rotationY: positionX * 150,
+            rotationX: positionY * 150,
+            ease: "none"
+        })
     })
-})
+
+    preapareAnimation()
+    loadingScreen()
+});
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // 
+
+
+
+
 
 // homeAnimation()
-preapareAnimation()
+
 
 
 const toggleButton = () => {
@@ -92,6 +80,96 @@ const toggleButton = () => {
 
     navbar.classList.toggle("-translate-x-[100%]")
 
+}
+
+function loadingScreen() {
+    let tlLoad = gsap.timeline()
+
+    tlLoad.to('#about', {
+        display: 'none',
+        duration: 0.1,
+    })
+        .to('#first', {
+            display: 'block',
+            duration: 0
+        })
+        .from('#first', {
+            y: 60,
+            opacity: 0,
+            duration: 0.7
+        })
+        .to('#loading', {
+            backgroundColor: "rgb(191 219 254 / var(--tw-bg-opacity))",
+            duration: 0
+        }, "-=0.7")
+        .to("#first", {
+            opacity: 0,
+            duration: .2
+        })
+        .to("#first", {
+            display: "none",
+            duration: 0
+        })
+        .to("#second", {
+            display: 'flex',
+            duration: 0
+        })
+        .from("#to", {
+            x: -60,
+            opacity: 0,
+            duration: 0.6
+        })
+        .from("#my", {
+            x: 60,
+            opacity: 0,
+            duration: 0.6
+        }, "-=0.7")
+        .to("#loading", {
+            backgroundColor: "rgb(254 252 232 / var(--tw-bg-opacity))",
+            duration: 0
+        }, "-=0.6")
+        .to("#second", {
+            opacity: 0,
+            duration: .2
+        })
+        .to("#second", {
+            display: "none",
+            duration: 0
+        })
+        .to("#third", {
+            display: "block",
+            duration: 0
+        })
+        .from("#third", {
+            opacity: 0,
+            scale: 2,
+            duration: 0.6
+        })
+        .to("#loading", {
+            backgroundColor: "rgb(236 252 203 / var(--tw-bg-opacity))",
+            duration: 0
+        }, "-=0.6")
+        .to("#loading", {
+            backgroundColor: "rgb(254 202 202 / var(--tw-bg-opacity))",
+            duration: 0,
+            onComplete: homeAnimation
+        }, "+=0.6")
+        .to('#loading', {
+            y: -100 + '%',
+            opacity: 0,
+            duration: 0.6,
+        })
+        .to('#navbar', {
+            opacity: 1,
+            duration: 0.3
+        })
+        .to('#loading', {
+            display: 'none',
+            duration: 0,
+            onComplete: () => {
+    
+            }
+        })
 }
 
 function eventPanel(index1, panel, index2, theme, index3) {
@@ -313,6 +391,35 @@ function eventPanel(index1, panel, index2, theme, index3) {
         })
 }
 
+function preapareAnimation() {
+    if (!preapareFlag) {
+        let tlPrepare = gsap.timeline()
+
+        tlPrepare.to("#splitAboutData .char", {
+            y: 10,
+            opacity: 0,
+            duration: 0
+        })
+            .to("#pictureAbout", {
+                y: 50,
+                opacity: 0,
+                duration: 0
+            })
+            .to("#aboutTextScroll", {
+                opacity: 0,
+                duration: 0
+            })
+
+        preapareFlag = true
+    }
+}
+
+function displayAnimation() {
+    if (!about.classList.contains("hidden")) {
+        aboutAnimation()
+    }
+}
+
 function homeAnimation() {
     let animation = gsap.timeline()
 
@@ -377,35 +484,6 @@ function homeAnimation() {
     })
 }
 
-function preapareAnimation() {
-    if (!preapareFlag) {
-        let tlPrepare = gsap.timeline()
-
-        tlPrepare.to("#splitAboutData .char", {
-            y: 10,
-            opacity: 0,
-            duration: 0
-        })
-            .to("#pictureAbout", {
-                y: 50,
-                opacity: 0,
-                duration: 0
-            })
-            .to("#aboutTextScroll", {
-                opacity: 0,
-                duration: 0
-            })
-
-        preapareFlag = true
-    }
-}
-
-function displayAnimation() {
-    if (!about.classList.contains("hidden")) {
-        aboutAnimation()
-    }
-}
-
 function aboutAnimation() {
     if (!aboutFlag) {
         let tlAbout = gsap.timeline()
@@ -414,7 +492,7 @@ function aboutAnimation() {
             y: 0,
             opacity: 1,
             stagger: 0.01,
-            duration: 0.2
+            duration: 0.02
         })
             .to("#pictureAbout", {
                 y: 0,

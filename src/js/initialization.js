@@ -19,7 +19,6 @@ let preapareFlag = false
 let aboutFlag = false
 const splitAboutData = new SplitType('#splitAboutData')
 const aboutTextScroll = document.querySelectorAll("#aboutTextScroll")
-console.log(aboutTextScroll);
 
 const colorTheme = [
     {
