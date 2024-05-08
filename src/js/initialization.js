@@ -14,11 +14,11 @@ let contact = document.getElementById("contact");
 
 let buttonsHome = document.querySelectorAll(".button button")
 
-let preapareFlag = false
-
-let aboutFlag = false
-const splitAboutData = new SplitType('#splitAboutData')
 const aboutTextScroll = document.querySelectorAll("#aboutTextScroll")
+const pictureAbout = document.querySelectorAll("#pictureAbout")
+
+const boxPortfolio = document.querySelectorAll("#boxPortfolio")
+const boxProject = document.querySelectorAll("#boxProject")
 
 const colorTheme = [
     {
@@ -71,7 +71,7 @@ const colorTheme = [
     },
 ]
 
-const jobWord = ["Student", "Developer", "Tester"]
+const jobWord = ["Student", "Developer", "Fullstack"]
 
 gsap.to("#panelTr1", {
     x: "-100%",

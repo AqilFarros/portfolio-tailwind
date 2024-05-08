@@ -1,22 +1,7 @@
 window.addEventListener('DOMContentLoaded', function (event) {
+    aboutAnimation()
 
-    aboutTextScroll.forEach((char) => {
-        const text = new SplitType(char, { types: 'words' })
-    
-        gsap.from(text.words, {
-            scrollTrigger: {
-                trigger: char,
-                start: '20% 80%',
-                end: 'top 60%',
-                scrub: true,
-            },
-            color: "rgba(255, 255, 255, 0.1)",
-            // scaleY: 0,
-            // y: -20,
-            // transformOrigin: "top",
-            stagger: 0.1
-        });
-    });
+    portfolioAnimation()
 
     navigation.forEach((anchor, index1) => {
         transitionPanel.forEach((panel, index2) => {
@@ -36,10 +21,10 @@ window.addEventListener('DOMContentLoaded', function (event) {
     document.addEventListener("mousemove", (event) => {
         let width = window.innerWidth;
         let height = window.innerHeight;
-    
+
         let positionX = (event.clientX / width) - 0.55;
         let positionY = (event.clientY / height) - 0.55;
-    
+
         gsap.to("#codeIcon", {
             rotationY: positionX * 150,
             rotationX: positionY * 150,
@@ -47,7 +32,6 @@ window.addEventListener('DOMContentLoaded', function (event) {
         })
     })
 
-    preapareAnimation()
     loadingScreen()
 });
 
@@ -73,7 +57,7 @@ const toggleButton = () => {
 function loadingScreen() {
     let tlLoad = gsap.timeline()
 
-    tlLoad.to('#about', {
+    tlLoad.to('#about, #portfolio', {
         display: 'none',
         duration: 0.4,
     })
@@ -155,7 +139,7 @@ function loadingScreen() {
             display: 'none',
             duration: 0,
             onComplete: () => {
-    
+
             }
         })
 }
@@ -345,7 +329,6 @@ function eventPanel(index1, panel, index2, theme, index3) {
             x: "100%",
             duration: 0.2,
             ease: "sine.in",
-            onComplete: displayAnimation
         })
 
         .to("#panelTr1", {
@@ -377,35 +360,6 @@ function eventPanel(index1, panel, index2, theme, index3) {
             x: "-500%",
             duration: 0
         })
-}
-
-function preapareAnimation() {
-    if (!preapareFlag) {
-        let tlPrepare = gsap.timeline()
-
-        tlPrepare.to("#splitAboutData .char", {
-            y: 10,
-            opacity: 0,
-            duration: 0
-        })
-            .to("#pictureAbout", {
-                y: 50,
-                opacity: 0,
-                duration: 0
-            })
-            .to("#aboutTextScroll", {
-                opacity: 0,
-                duration: 0
-            })
-
-        preapareFlag = true
-    }
-}
-
-function displayAnimation() {
-    if (!about.classList.contains("hidden")) {
-        aboutAnimation()
-    }
 }
 
 function homeAnimation() {
@@ -473,31 +427,68 @@ function homeAnimation() {
 }
 
 function aboutAnimation() {
-    if (!aboutFlag) {
-        let tlAbout = gsap.timeline()
+    aboutTextScroll.forEach((char) => {
+        const text = new SplitType(char, { types: 'words' })
 
-        tlAbout.to("#splitAboutData .char", {
-            y: 0,
-            opacity: 1,
-            stagger: 0.01,
-            duration: 0.02
+        gsap.from(text.words, {
+            scrollTrigger: {
+                trigger: char,
+                start: '20% 80%',
+                end: 'top 60%',
+                scrub: true,
+            },
+            color: "rgba(255, 255, 255, 0.1)",
+            // scaleY: 0,
+            // y: -20,
+            // transformOrigin: "top",
+            stagger: 0.1
+        });
+    });
+
+    pictureAbout.forEach((image) => {
+        gsap.from(image, {
+            scrollTrigger: {
+                trigger: image,
+                start: '10% 80%',
+                end: 'top 60%',
+                scrub: true
+            },
+            y: '50%',
+            scaleY: 0,
+            opacity: 0
         })
-            .to("#pictureAbout", {
-                y: 0,
-                opacity: 1,
-                duration: 0.5
-            })
-            .to("#aboutTextScroll", {
-                opacity: 1,
-                duration: 0.3
-            })
-
-        aboutFlag = true
-    }
+    })
 }
 
+function portfolioAnimation() {
+    boxPortfolio.forEach((box) => {
+        gsap.from(box, {
+            scrollTrigger: {
+                trigger: box,
+                start: '20% 80%',
+                end: 'top 80%',
+                scrub: true,
+            },
+            y: '50%',
+            scaleY: 0,
+            opacity: 0
+        })
+    })
 
-
+    boxProject.forEach((box) => {
+        gsap.from(box, {
+            scrollTrigger: {
+                trigger: box,
+                start: '20% 90%',
+                end: 'top 70%',
+                scrub: true,
+            },
+            y: '50%',
+            scaleY: 0,
+            opacity: 0
+        })
+    })
+}
 
 const lenis = new Lenis()
 
